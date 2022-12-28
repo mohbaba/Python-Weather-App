@@ -1,10 +1,37 @@
 import flet 
-from flet import  UserControl,Page,Column
+from flet import  UserControl,Page,Column,colors,Container,Row,border_radius,LinearGradient,alignment
 
 
 class App(UserControl):
     def build(self):
-        return Column()
+        return Column(
+            controls= [
+                Container(
+                    width = 300,
+                    height = 300,
+                    bgcolor = colors.AMBER_300,
+                    # The .all() method rounds all sides of the container.
+                    # border_radius= border_radius.all(25),
+                    # The .only() method applies the radius selectively to the side desired.
+                    border_radius= border_radius.only(topRight=25),
+                    # To add gradient to the container
+                    gradient=LinearGradient(
+                        begin = alignment.bottom_right,
+                        end= alignment.top_left,
+                        colors=[colors.AMBER_200, colors.TEAL_300]
+                        ),
+                    
+                                    ),
+                
+                
+                
+                
+                
+                
+                
+                
+            ]
+        )
     
     
     
@@ -17,9 +44,13 @@ def main(page: Page):
     page.window_width = 600
     page.window_height = 300
     
+    # to change color 
+    page.bgcolor = colors.BLUE_GREY_500
+    
+    
     
     # to disable resizing 
-    page.window_resizable = False
+    # page.window_resizable = False
     
     page.update()
     
