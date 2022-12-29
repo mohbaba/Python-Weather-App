@@ -1,5 +1,5 @@
 import flet 
-from flet import  UserControl,Page,Column,colors,Container,Row,border_radius,LinearGradient,alignment
+from flet import  UserControl,Page,Column,colors,Container,Row,border_radius,LinearGradient,alignment,Text
 
 
 class App(UserControl):
@@ -7,21 +7,37 @@ class App(UserControl):
         return Column(
             controls= [
                 Container(
-                    width = 300,
-                    height = 300,
+                    width = 200,
+                    height = 200,
                     bgcolor = colors.AMBER_300,
                     # The .all() method rounds all sides of the container.
                     # border_radius= border_radius.all(25),
                     # The .only() method applies the radius selectively to the side desired.
-                    border_radius= border_radius.only(topRight=25),
+                    border_radius= border_radius.only(topRight=25, bottomLeft=25),
                     # To add gradient to the container
                     gradient=LinearGradient(
                         begin = alignment.bottom_right,
                         end= alignment.top_left,
                         colors=[colors.AMBER_200, colors.TEAL_300]
                         ),
+                     # To add other widgets inside the container, use the contents parameter
+                     content=
+                         Text(
+                    #         # Text
+                             "Hello World!",
+                    #         # Size
+                             size= 55,
+                    #         # Weight
+                             weight= "w900", # values of weight are from w100 - w900
+                    #         # Color 
+                             color = "black",
+                            
+                            ),
                     
-                                    ),
+                        
+                    
+                    
+                ),
                 
                 
                 
