@@ -1,5 +1,5 @@
 import flet 
-from flet import  UserControl,Page,Column,colors,Container,Row,border_radius,LinearGradient,alignment,Text
+from flet import  UserControl,Page,Column,colors,Container,Row,border_radius,LinearGradient,alignment,Text,padding
 
 
 class App(UserControl):
@@ -7,8 +7,8 @@ class App(UserControl):
         return Column(
             controls= [
                 Container(
-                    width = 200,
-                    height = 200,
+                    width = 300,
+                    height = 300,
                     bgcolor = colors.AMBER_300,
                     # The .all() method rounds all sides of the container.
                     # border_radius= border_radius.all(25),
@@ -20,23 +20,67 @@ class App(UserControl):
                         end= alignment.top_left,
                         colors=[colors.AMBER_200, colors.TEAL_300]
                         ),
-                     # To add other widgets inside the container, use the contents parameter
-                     content=
-                         Text(
-                    #         # Text
-                             "Hello World!",
-                    #         # Size
-                             size= 55,
-                    #         # Weight
-                             weight= "w900", # values of weight are from w100 - w900
-                    #         # Color 
-                             color = "black",
+                    # To add other widgets inside the container, use the contents parameter
+                    # To add padding within the container, it must be done outside the content parameters
+                    # padding = padding.all(50),
+                    # If padding needs to be added to specific siddes, use the only() like with border radius
+                    padding = padding.only(top=50,bottom=50),
+                    content=
+                    Column(
+                        # Columns and Rows have no padding parameters at this moment, but they can be aligned
+                        horizontal_alignment = "center",
+                        # Spacing betweeen widgets can done using
+                        spacing = 0,
+                        controls = [
+                            Row(
+                                spacing= 0,
+                                vertical_alignment = "center",
+                                controls=[Container(
+                                width = 32,
+                                height= 32,
+                                bgcolor= "black",
+                            ),
+                            Container(
+                                width = 32,
+                                height= 32,
+                                bgcolor= "black",
+                            )]
+                                ),
+                            # Container(
+                            #     width = 32,
+                            #     height= 32,
+                            #     bgcolor= "black",
+                            # ),
+                           
+                            Text(
+                            # Text
+                            "Hello World!",
+                            # Size
+                            size= 30,
+                            # Weight
+                            weight= "w900", # values of weight are from w100 - w900
+                            # Color 
+                            color = "black",
+                            # Text align, center places it in the middle, start(all he way to the left) while end(to the right)
+                            text_align= "center",
                             
                             ),
-                    
-                        
-                    
-                    
+                        # To have multiple widgets in the container,we pass the widgets into a row or a column controls as the content can only take in one arguement
+                            
+                            Text(
+                                # Text
+                                "Hello World!",
+                                # Size
+                                size= 10,
+                                # Weight
+                                weight= "w900", # values of weight are from w100 - w900
+                                # Color 
+                                color = "black",
+                                # Text align, center places it in the middle, start(all he way to the left) while end(to the right)
+                                text_align= "center",
+                            )
+                        ]
+                    )
                 ),
                 
                 
