@@ -1,6 +1,19 @@
 import flet 
-from flet import  UserControl,Page,Column,colors,Container,Row,border_radius,LinearGradient,alignment,Text,padding
-
+from flet import (
+                UserControl,
+                Page,
+                Column,
+                colors,
+                Container,
+                Row,
+                border_radius,
+                LinearGradient,
+                alignment,
+                Text,
+                padding,
+                ElevatedButton
+                
+                )
 
 class App(UserControl):
     def build(self):
@@ -33,8 +46,7 @@ class App(UserControl):
                         spacing = 0,
                         controls = [
                             Row(
-                                spacing= 0,
-                                vertical_alignment = "center",
+                                alignment = "center",
                                 controls=[Container(
                                 width = 32,
                                 height= 32,
@@ -46,12 +58,8 @@ class App(UserControl):
                                 bgcolor= "black",
                             )]
                                 ),
-                            # Container(
-                            #     width = 32,
-                            #     height= 32,
-                            #     bgcolor= "black",
-                            # ),
-                           
+                            
+
                             Text(
                             # Text
                             "Hello World!",
@@ -78,7 +86,17 @@ class App(UserControl):
                                 color = "black",
                                 # Text align, center places it in the middle, start(all he way to the left) while end(to the right)
                                 text_align= "center",
-                            )
+                            ),
+                            # Buttons
+                            # Buttons on flet are of different types with minor differences
+                            ElevatedButton(
+                                text = 'Elevated Button',
+                                # text color 
+                                color = 'black',
+                                # For an action when the button is clicked
+                                on_click = lambda e:print("Hey!!"),
+                                bgcolor= 'green',
+                            ),
                         ]
                     )
                 ),
