@@ -11,7 +11,8 @@ from flet import (
                 alignment,
                 Text,
                 padding,
-                ElevatedButton
+                ElevatedButton,
+                FloatingActionButton
                 
                 )
 
@@ -93,6 +94,7 @@ class App(UserControl):
                             # Buttons
                             # Buttons on flet are of different types with minor differences
                             Container(
+                                
                             ElevatedButton(
                                 text = 'Elevated Button',
                                 # text color 
@@ -100,11 +102,19 @@ class App(UserControl):
                                 # For an action when the button is clicked
                                 on_click = lambda e:print("Hey!!"),
                                 bgcolor= 'green',
-                            )
+                                height = 30
+                            ),
+                            padding = padding.only(top = 7)
                             
                                 ),
                             
                             # FloatingActionButton
+                            FloatingActionButton(
+                                text = " How Far!!! ",
+                                width = 100,
+                                height = 30
+                                
+                                ),
                             
                         ]
                     )
