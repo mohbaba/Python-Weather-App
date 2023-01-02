@@ -26,9 +26,39 @@ class App(UserControl):
             gradient= LinearGradient(
                 begin= alignment.bottom_left,
                 end= alignment.top_right,
-                colors= [ "",""]
+                colors= [ "#1f2937","#111827"]
                 ),
             border_radius= border_radius.all(25),
+            
+            
+            content = Column(
+                controls=[
+                    Row(
+                        controls=[
+                            Container(
+                                width = 50,
+                                height = 50,
+                                bgcolor = "red",
+                                border_radius= border_radius.all(50)
+                                
+                            ),
+                            Container(
+                                width = 50,
+                                height = 50,
+                                bgcolor = "yellow",
+                                border_radius= border_radius.all(50)
+                            ),
+                            Container(
+                                width = 50,
+                                height = 50,
+                                bgcolor = "green",
+                                border_radius= border_radius.all(50)
+                            ),
+                        ]
+                    )
+                ]
+                
+            )
         )
         
         
