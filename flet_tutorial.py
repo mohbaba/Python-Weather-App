@@ -47,15 +47,18 @@ class App(UserControl):
                         controls = [
                             Row(
                                 alignment = "center",
-                                controls=[Container(
+                                controls=[
+                            Container(
                                 width = 32,
                                 height= 32,
                                 bgcolor= "black",
+                                border_radius= border_radius.all(25),
                             ),
                             Container(
                                 width = 32,
                                 height= 32,
                                 bgcolor= "black",
+                                border_radius= border_radius.all(25),
                             )]
                                 ),
                             
@@ -89,6 +92,7 @@ class App(UserControl):
                             ),
                             # Buttons
                             # Buttons on flet are of different types with minor differences
+                            Container(
                             ElevatedButton(
                                 text = 'Elevated Button',
                                 # text color 
@@ -96,7 +100,12 @@ class App(UserControl):
                                 # For an action when the button is clicked
                                 on_click = lambda e:print("Hey!!"),
                                 bgcolor= 'green',
-                            ),
+                            )
+                            
+                                ),
+                            
+                            # FloatingActionButton
+                            
                         ]
                     )
                 ),
