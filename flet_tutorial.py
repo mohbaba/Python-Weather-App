@@ -18,6 +18,21 @@ from flet import (
 
 class App(UserControl):
     def build(self):
+        
+        return Container(
+            width=400,
+            height= 400, 
+            bgcolor= "black",
+            gradient= LinearGradient(
+                begin= alignment.bottom_left,
+                end= alignment.top_right,
+                colors= [ "",""]
+                ),
+            border_radius= border_radius.all(25),
+        )
+        
+        
+        
         return Column(
             controls= [
                 Container(
@@ -104,7 +119,7 @@ class App(UserControl):
                                 bgcolor= 'green',
                                 height = 30
                             ),
-                            padding = padding.only(top = 7)
+                            padding = padding.only(top = 7,bottom = 7)
                             
                                 ),
                             
@@ -112,7 +127,9 @@ class App(UserControl):
                             FloatingActionButton(
                                 text = " How Far!!! ",
                                 width = 100,
-                                height = 30
+                                height = 30,
+                                bgcolor = "green",
+                                color = 'black',
                                 
                                 ),
                             
