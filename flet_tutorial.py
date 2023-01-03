@@ -12,7 +12,8 @@ from flet import (
                 Text,
                 padding,
                 ElevatedButton,
-                FloatingActionButton
+                FloatingActionButton,
+                border
                 
                 )
 
@@ -29,6 +30,7 @@ class App(UserControl):
                 colors= [ "#1f2937","#111827"]
                 ),
             border_radius= border_radius.all(25),
+            padding= padding.only(top=10,left=20, right = 20),
             
             
             content = Column(
@@ -36,26 +38,30 @@ class App(UserControl):
                     Row(
                         controls=[
                             Container(
-                                width = 50,
-                                height = 50,
+                                width = 16,
+                                height = 16,
                                 bgcolor = "red",
-                                border_radius= border_radius.all(50)
+                                border_radius= border_radius.all(20)
                                 
                             ),
                             Container(
-                                width = 50,
-                                height = 50,
+                                width = 16,
+                                height = 16,
                                 bgcolor = "yellow",
-                                border_radius= border_radius.all(50)
+                                border_radius= border_radius.all(20)
                             ),
                             Container(
-                                width = 50,
-                                height = 50,
+                                width = 16,
+                                height = 16,
                                 bgcolor = "green",
-                                border_radius= border_radius.all(50)
+                                border_radius= border_radius.all(20)
                             ),
                         ]
-                    )
+                    ),
+                    # To add a bottom border to the 
+                    Container(
+                        border = border.only(bottom= border.BorderSide(8, "white"))
+                    ),
                 ]
                 
             )
