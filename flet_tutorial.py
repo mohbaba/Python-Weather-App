@@ -19,6 +19,22 @@ from flet import (
                 )
 
 class App(UserControl):
+    
+    
+    def SideColumn(self):
+        self.NumberColumn = Column(controls=[])
+        
+        for numbers in range(0,30):
+            self.NumberColumn.controls.append(Text(numbers,color="white"))
+            
+        self.NumberColumn.update()
+        
+        
+    
+    
+    
+    
+    
     def build(self):
         
         return Container(
@@ -68,11 +84,16 @@ class App(UserControl):
                         
                     ),
                     # Creating numbers to the left side
-                    Text("1",color = "white"),
-                    Text("1"),
-                    Text("1"),
-                    Text("1"),
-                    Text("1"),
+                    Column(
+                        controls = [
+                            Text("1",color = "white"),
+                            Text("1"),
+                            Text("1"),
+                            Text("1"),
+                            Text("1"),
+                        ]
+                    )
+                    
                         
                 ]
                 
