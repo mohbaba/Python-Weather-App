@@ -27,9 +27,9 @@ class App(UserControl):
         for numbers in range(0,30):
             self.NumberColumn.controls.append(Text(numbers,color="white"))
             
-        self.NumberColumn.update()
+        # self.NumberColumn.update()
         
-        
+        return self.NumberColumn
     
     
     
@@ -73,6 +73,7 @@ class App(UserControl):
                                 bgcolor = "green",
                                 border_radius = border_radius.all(20)
                             ),
+                            
                         ]
                     ),
                     # To add a bottom border to the 
@@ -83,16 +84,17 @@ class App(UserControl):
                         
                         
                     ),
+                    self.SideColumn(),
                     # Creating numbers to the left side
-                    Column(
-                        controls = [
-                            Text("1",color = "white"),
-                            Text("1"),
-                            Text("1"),
-                            Text("1"),
-                            Text("1"),
-                        ]
-                    )
+                    # Column(
+                    #     controls = [
+                    #         Text("1",color = "white"),
+                    #         Text("1"),
+                    #         Text("1"),
+                    #         Text("1"),
+                    #         Text("1"),
+                    #     ]
+                    # )
                     
                         
                 ]
