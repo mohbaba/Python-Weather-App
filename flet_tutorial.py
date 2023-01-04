@@ -64,6 +64,8 @@ class App(UserControl):
                         border = border.only(bottom= border.BorderSide(0.4, "white")),
                         # To bypass the overall padding,the margin parameter can be used.
                         margin= margin.only(right = -18, left = -18),
+                        # Creating numbers to the left side
+                        Text("1"),
                         
                     ),
                 ]
