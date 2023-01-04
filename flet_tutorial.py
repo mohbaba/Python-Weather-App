@@ -13,7 +13,8 @@ from flet import (
                 padding,
                 ElevatedButton,
                 FloatingActionButton,
-                border
+                border,
+                margin,
                 
                 )
 
@@ -54,13 +55,16 @@ class App(UserControl):
                                 width = 16,
                                 height = 16,
                                 bgcolor = "green",
-                                border_radius= border_radius.all(20)
+                                border_radius = border_radius.all(20)
                             ),
                         ]
                     ),
                     # To add a bottom border to the 
                     Container(
-                        border = border.only(bottom= border.BorderSide(8, "white"))
+                        border = border.only(bottom= border.BorderSide(0.4, "white")),
+                        # To bypass the overall padding,the margin parameter can be used.
+                        margin= margin.only(right = -18, left = -18),
+                        
                     ),
                 ]
                 
