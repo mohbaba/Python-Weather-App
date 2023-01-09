@@ -35,8 +35,18 @@ def main(page: Page):
     
     c = Container(
         width = 310,
-        height= 660
+        height= 660,
+        border_radius= 35,
+        bgcolor= "black",
+        padding= 10,
+        content= Stack(
+            width= 300,
+            height= 550,
+            controls= []
+            
+        )
     )
+    page.add(c)
 
 if __name__ == "__main__":
     flet.app(target=main, assets_dir="assets")
