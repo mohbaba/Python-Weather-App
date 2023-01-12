@@ -35,6 +35,14 @@ def main(page: Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
     
+    
+    # current temperature
+    def current_temp():
+        current_temp = current.json()['current']['temp']
+        return [int(current_temp)]
+        
+    
+    
     # Animation
     def _expand(e):
         if e.data == "true":
@@ -57,8 +65,65 @@ def main(page: Page):
                 colors= ["lightblue600", "lightblue900"],
             ),
             border_radius= 28,
-            animate = animation.Animation(duration=350,curve="decelerate"),
-            on_hover=lambda e: _expand(e)
+            animate = animation.Animation(duration=450,curve="decelerate"),
+            on_hover=lambda e: _expand(e),
+            content=Column(
+                alignment = "start",
+                spacing = 10,
+                controls= [
+                    Row(
+                        alignment= "center",
+                        controls = [
+                            Text(
+                                "Kwara, NG",
+                                size = 16,
+                                weight = "w500",
+                                color = "white"
+                                )
+                            ]
+                        ),
+                    Container(padding = padding.only(bottom=5)),
+                    Row(
+                        alignment= 'center',
+                        spacing = 30,
+                        controls = [
+                            Column(
+                                controls = [
+                                    Container(
+                                        width= 90,
+                                        height =90,
+                                        image_src = "./assets/cloudy-day.png"
+                                    )
+                                ]
+                            ),
+                            Column(
+                                spacing = 5,
+                                horizontal_alignment= "center",
+                                controls = [
+                                    Text(
+                                        "Today",
+                                        size = 12,
+                                        text_align = 'center'
+                                    ),
+                                    Row(
+                                        vertical_alignment = 'start',
+                                        spacing = 0,
+                                        controls = [
+                                            Container(
+                                                content = Text(
+                                                    _today[0],
+                                                    size = 52,
+                                                    
+                                                )
+                                            )
+                                        ]
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                    ]
+                )
             
             
         )
