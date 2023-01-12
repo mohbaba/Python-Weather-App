@@ -18,10 +18,22 @@ lat = 8.8367891
 lon = 4.6688487
 
 
+url = "https://weatherbit-v1-mashape.p.rapidapi.com/current"
 
+querystring = {"lon":lon,"lat":lat}
+
+headers = {
+	"X-RapidAPI-Key": "4fc5c694d7msha02ff297e54b089p15b409jsnd00a548ee6fe",
+	"X-RapidAPI-Host": "weatherbit-v1-mashape.p.rapidapi.com"
+}
+
+# response = requests.request("GET", url, headers=headers, params=querystring)
+
+print(response.text)
 api_key = "c18e814df3b2496ab089376f69dfc493"
 current = requests.get(f'https://api.weatherbit.io/v2.0/current?lat={lat}&lon={lon}&key={api_key}&include=minutely')
-data = current.json()['data'][0]
+data = response.json()['data'][0]
+
 
 days = [
     "Mon",
@@ -41,8 +53,16 @@ def main(page: Page):
     # current temperature
     def current_temp():
         # The int function will round the temp to the a whole figure
-        current_temp = int(data['app_temp'])
-        return [current_temp]
+        current_temp = int(data['temp'])
+        current_description = data['weather']['description']
+        current_weather = data['weather']['code']
+        current_wind = int(data['wind_spd'])
+        current_feels = int(data['app_temp'])
+        current_humidity = int(data['rh'])
+        
+        
+        
+        return [current_temp,current_weather,current_description, current_wind,current_humidity,current_feels]
         
     
     
@@ -108,7 +128,8 @@ def main(page: Page):
                                     Text(
                                         "Today",
                                         size = 12,
-                                        text_align = 'center'
+                                        text_align = 'center',
+                                        color= "white"
                                     ),
                                     Row(
                                         vertical_alignment = 'start',
@@ -118,17 +139,50 @@ def main(page: Page):
                                                 content = Text(
                                                     _today[0],
                                                     size = 52,
+                                                    color= "white"
+                                                    
+                                                )
+                                            ),
+                                            Container(
+                                                content = Text(
+                                                    "°C",
+                                                    size = 28,
+                                                    text_align= 'center',
+                                                    color = "white"
                                                     
                                                 )
                                             )
                                         ]
+                                    ),
+                                    Text(
+                                        _today[1] + 'Overcast',
+                                        size = 10,
+                                        color = "white",
+                                        text_align= 'center'
                                     )
                                 ]
                             )
                         ]
+                    ),
+                    Divider(
+                        height = 8,
+                        thickness = 1,
+                        color= "white10",
+                    ),
+                    Row(
+                        alignment = "spaceAround",
+                        controls = [
+                            Container(
+                                content = Column(
+                                    horizontal_alignment= "center",
+                                    spacing = 2,
+                                    
+                                )
+                            )
+                        ]
                     )
-                    ]
-                )
+                ]
+            )
             
             
         )
