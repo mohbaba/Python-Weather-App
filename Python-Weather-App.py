@@ -5,6 +5,7 @@ import requests
 import datetime
 import geopy
 from geopy.geocoders import Nominatim
+import json
 
 
 # Nominatim is an api that gets the data needed after getting the user's address
@@ -18,8 +19,9 @@ lon = 4.6688487
 
 
 
-api_key = "b525ab6dd052055c4fc36e2ea7794cc4"
-current = requests.get(f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon=-{lon}&exclude=hourly,daily&appid={api_key}')
+api_key = "c18e814df3b2496ab089376f69dfc493"
+current = requests.get(f'https://api.weatherbit.io/v2.0/current?lat={lat}&lon={lon}&key={api_key}&include=minutely')
+data = current.json()['data'][0]
 
 days = [
     "Mon",
@@ -38,8 +40,9 @@ def main(page: Page):
     
     # current temperature
     def current_temp():
-        current_temp = current.json()['current']['temp']
-        return [int(current_temp)]
+        # The int function will round the temp to the a whole figure
+        current_temp = int(data['app_temp'])
+        return [current_temp]
         
     
     
@@ -55,6 +58,8 @@ def main(page: Page):
     
     # Top container
     def _top():
+        
+        _today = current_temp()
         
         top = Container(
             width = 330,
