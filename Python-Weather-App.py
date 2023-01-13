@@ -27,7 +27,7 @@ headers = {
 	"X-RapidAPI-Host": "weatherbit-v1-mashape.p.rapidapi.com"
 }
 
-# response = requests.request("GET", url, headers=headers, params=querystring)
+response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
 
@@ -189,11 +189,12 @@ def main(page: Page):
                                         Text(
                                             str(_today[3]) + " km/hr",
                                             size = 11,
+                                            color = "white"
                                         ),
                                         Text(
                                             "wind",
                                             size = 9,
-                                            color = "white54"
+                                            color = "white"
                                         )
                                     ]
                                 )
@@ -214,11 +215,12 @@ def main(page: Page):
                                         Text(
                                             str(_today[4]) + "%",
                                             size = 11,
+                                            color = "white"
                                         ),
                                         Text(
                                             "Humidity",
                                             size = 9,
-                                            color = "white54"
+                                            color = "white"
                                         )
                                     ]
                                 )
