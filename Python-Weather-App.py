@@ -30,6 +30,7 @@ headers = {
 # response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
+
 api_key = "c18e814df3b2496ab089376f69dfc493"
 current = requests.get(f'https://api.weatherbit.io/v2.0/current?lat={lat}&lon={lon}&key={api_key}&include=minutely')
 data = response.json()['data'][0]
@@ -54,7 +55,7 @@ def main(page: Page):
     def current_temp():
         # The int function will round the temp to the a whole figure
         current_temp = int(data['temp'])
-        current_description = data['weather']['description']
+        current_description = str(data['weather']['description'])
         current_weather = data['weather']['code']
         current_wind = int(data['wind_spd'])
         current_feels = int(data['app_temp'])
@@ -155,7 +156,7 @@ def main(page: Page):
                                         ]
                                     ),
                                     Text(
-                                        _today[1] + 'Overcast',
+                                        str(_today[2]) + ' -Overcast',
                                         size = 10,
                                         color = "white",
                                         text_align= 'center'
@@ -176,7 +177,25 @@ def main(page: Page):
                                 content = Column(
                                     horizontal_alignment= "center",
                                     spacing = 2,
-                                    
+                                    controls = [
+                                        Container(
+                                            alignment = alignment.center,
+                                            content = Image(src =" ./assets/wind.png",
+                                                            color = "white",
+                                            ),
+                                            width = 20,
+                                            height =20,
+                                        ),
+                                        Text(
+                                            str(_today[3]) + " km/hr",
+                                            size = 11,
+                                        )
+                                        Text(
+                                            "wind",
+                                            size = 9,
+                                            color = "white54"
+                                        )
+                                    ]
                                 )
                             )
                         ]
