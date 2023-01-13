@@ -189,9 +189,34 @@ def main(page: Page):
                                         Text(
                                             str(_today[3]) + " km/hr",
                                             size = 11,
-                                        )
+                                        ),
                                         Text(
                                             "wind",
+                                            size = 9,
+                                            color = "white54"
+                                        )
+                                    ]
+                                )
+                            ),
+                            Container(
+                                content = Column(
+                                    horizontal_alignment= "center",
+                                    spacing = 2,
+                                    controls = [
+                                        Container(
+                                            alignment = alignment.center,
+                                            content = Image(src =" ./assets/humidity.png",
+                                                            color = "white",
+                                            ),
+                                            width = 20,
+                                            height =20,
+                                        ),
+                                        Text(
+                                            str(_today[4]) + "%",
+                                            size = 11,
+                                        ),
+                                        Text(
+                                            "Humidity",
                                             size = 9,
                                             color = "white54"
                                         )
