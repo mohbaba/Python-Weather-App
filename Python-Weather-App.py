@@ -64,8 +64,10 @@ def main(page: Page):
         return [current_temp,current_weather,current_description, current_wind,current_humidity,current_feels]
         
     # current extra
-    def curren_extra():
+    def current_extra():
+        #  For the extra information that will show on hover
         
+        extra_info []
         
         pass
     
