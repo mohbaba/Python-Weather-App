@@ -67,7 +67,8 @@ def main(page: Page):
     def current_extra():
         #  For the extra information that will show on hover
         
-        extra_info []
+        extra_info = []
+        extra =[[int(data['vis']/ 1000)]]
         
         pass
     
