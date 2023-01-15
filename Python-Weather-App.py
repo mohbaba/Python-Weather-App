@@ -27,7 +27,7 @@ headers = {
 	"X-RapidAPI-Host": "weatherbit-v1-mashape.p.rapidapi.com"
 }
 
-response = requests.request("GET", url, headers=headers, params=querystring)
+# response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
 
@@ -61,11 +61,13 @@ def main(page: Page):
         current_feels = int(data['app_temp'])
         current_humidity = int(data['rh'])
         
-        
-        
         return [current_temp,current_weather,current_description, current_wind,current_humidity,current_feels]
         
-    
+    # current extra
+    def curren_extra():
+        
+        
+        pass
     
     # Animation
     def _expand(e):
@@ -81,6 +83,14 @@ def main(page: Page):
     def _top():
         
         _today = current_temp()
+        _today_extra = GridView(
+            max_extent= 150,
+            expand = 1,
+            run_spacing= 5,
+            spacing= 5
+        )
+        
+        
         
         top = Container(
             width = 330,
@@ -224,9 +234,38 @@ def main(page: Page):
                                         )
                                     ]
                                 )
+                            ),
+                            
+                            Container(
+                                content = Column(
+                                    horizontal_alignment= "center",
+                                    spacing = 2,
+                                    controls = [
+                                        Container(
+                                            alignment = alignment.center,
+                                            content = Image(src =" ./assets/humidity.png",
+                                                            color = "white",
+                                            ),
+                                            width = 20,
+                                            height =20,
+                                        ),
+                                        Text(
+                                            str(_today[5]) + "°C",
+                                            size = 11,
+                                            color = "white"
+                                        ),
+                                        Text(
+                                            "Feels Like",
+                                            size = 9,
+                                            color = "white"
+                                        )
+                                    ]
+                                )
                             )
                         ]
-                    )
+                    ),
+                    # to display more data on hover
+                    _today_extra,
                 ]
             )
             
