@@ -66,9 +66,33 @@ def main(page: Page):
     # current extra
     def current_extra():
         #  For the extra information that will show on hover
+        # Divide the visibility data by 1000 to get the value in km
         
         extra_info = []
-        extra =[[int(data['vis']/ 1000)]]
+        extra =[
+            [
+                int(data['vis']/ 1000),
+                # Pass in extra data to display alongside the visibility
+                "Km",
+                "Visisbility",
+                "./assets/visibility.png"
+            ],
+            [
+                round(data['pres']*0.03,2),
+                # Pass in extra data to display alongside the visibility
+                "inHg",
+                "Pressure",
+                "./assets/barometer.png"
+            ],
+            [ # The final two are the sunrise and sunset, they will be converted from unix time to readable time using datetime functions
+            # The fromtimestamp and the strftime function does...
+            datetime.datetime.fromtimestamp(
+                data["sunset"]
+            ).strftime("%I:%M %p"),
+            "",
+            ]
+            
+            ]
         
         pass
     
