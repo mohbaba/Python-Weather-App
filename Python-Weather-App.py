@@ -90,10 +90,29 @@ def main(page: Page):
                 data["sunset"]
             ).strftime("%I:%M %p"),
             "",
+            "Sunset",
+            "./assets/sunset.png",
+            ],
+            [ # The final two are the sunrise and sunset, they will be converted from unix time to readable time using datetime functions
+            # The fromtimestamp and the strftime function does...
+            datetime.datetime.fromtimestamp(
+                data["sunrise"]
+            ).strftime("%I:%M %p"),
+            "",
+            "Sunrise",
+            "./assets/sunrise.png",
             ]
             
             ]
+        # Time to create UI using the extra data above 
         
+        for data in extra:
+            extra_info.append(
+                Container(
+                    bgcolor="white10",
+                    
+                )
+            )
         pass
     
     # Animation
