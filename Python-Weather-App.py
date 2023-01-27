@@ -18,7 +18,7 @@ lat = 8.8367891
 lon = 4.6688487
 
 
-url = "https://weatherbit-v1-mashape.p.rapidapi.com/current"
+url = "https://weatherbit-v1-mashape.p.rapidapi.com/forecast/daily"
 
 querystring = {"lon":lon,"lat":lat}
 
@@ -27,7 +27,7 @@ headers = {
 	"X-RapidAPI-Host": "weatherbit-v1-mashape.p.rapidapi.com"
 }
 
-# response = requests.request("GET", url, headers=headers, params=querystring)
+response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
 
@@ -65,7 +65,7 @@ def main(page: Page):
         
     # current extra
     def current_extra():
-        #  For the extra information that will show on hover
+        # For the extra information that will show on hover
         # Divide the visibility data by 1000 to get the value in km
         
         extra_info = []
@@ -79,7 +79,7 @@ def main(page: Page):
             ],
             [
                 round(data['pres']*0.03,2),
-                # Pass in extra data to display alongside the visibility
+                # Pass in extra data to display alongside the pressure
                 "inHg",
                 "Pressure",
                 "./assets/barometer.png"
@@ -110,6 +110,42 @@ def main(page: Page):
             extra_info.append(
                 Container(
                     bgcolor="white10",
+                    border_radius = 12,
+                    alignment = alignment.center,
+                    content=Column(
+                        alignment = "center",
+                        horizontal_alignment="center",
+                        spacing = 25,
+                        controls= [
+                            Container(
+                                alignment = alignment.center,
+                                content = Image(
+                                    src = data[3],
+                                    color = 'white'
+                                ),
+                                width = 32,
+                                height = 32,
+                            ),
+                            Container(
+                                content=Column(
+                                    alignment = "center",
+                                    horizontal_alignment="center",
+                                    spacing = 0,
+                                    controls = [
+                                        Text(
+                                            str(data[0])+" " + data[1],
+                                            size = 14,
+                                        ),
+                                        Text(
+                                            data[2],
+                                            color = "white54",
+                                            size = 11,
+                                        ),
+                                    ]
+                                )
+                            )
+                        ]
+                    )
                     
                 )
             )
@@ -118,11 +154,11 @@ def main(page: Page):
     # Animation
     def _expand(e):
         if e.data == "true":
-            c.content.controls[0].height = 560
-            c.content.controls[0].update()
+            c.content.controls[1].height = 560
+            c.content.controls[1].update()
         else:
-            c.content.controls[0].height = 660 * 0.40
-            c.content.controls[0].update()
+            c.content.controls[1].height = 660 * 0.40
+            c.content.controls[1].update()
     
     
     # Top container
@@ -136,7 +172,8 @@ def main(page: Page):
             spacing= 5
         )
         
-        
+        for info in current_extra():
+            _today_extra.controls.append(info)
         
         top = Container(
             width = 330,
@@ -289,7 +326,7 @@ def main(page: Page):
                                     controls = [
                                         Container(
                                             alignment = alignment.center,
-                                            content = Image(src =" ./assets/humidity.png",
+                                            content = Image(src =" ./assets/thermometer.png",
                                                             color = "white",
                                             ),
                                             width = 20,
@@ -320,9 +357,132 @@ def main(page: Page):
         return top
         
     
+    # Bottom data
+    def _bot_data():
+        _bot_data = []
+        for index in range(1,8):
+            _bot_data.append(
+                Row(
+                    spacing=5,
+                    alignment= 'spaceBetween',
+                    controls = [
+                        Row(
+                            expand = 1,
+                            alignment = 'start',
+                            controls = [
+                                Container(
+                                    alignment = alignment.center,
+                                    content = Text(
+                                        
+                                        days[
+                                            datetime.datetime.weekday(
+                                                datetime.datetime.fromtimestamp(
+                                                    data[index]['ts']
+                                                )
+                                            )
+                                        ]
+                                    )
+                                )
+                            ]
+                        ),
+                        Row(
+                            expand =1 ,
+                            controls = [
+                                Container(
+                                    content=Row(
+                                        alignment = 'start',
+                                        controls = [
+                                            Container(
+                                                width=20,
+                                                height = 20,
+                                                alignment = alignment.center_left,
+                                                content = Image(
+                                                    src = f'./assets/forecast/{data[index]["weather"]["description"].lower().png}'
+                                                )
+                                            ),
+                                            Text(
+                                                data[index]["weather"]["description"],
+                                                size=11,
+                                                color='white54',
+                                                text_align='center',
+                                            )
+                                        ]
+                                    )
+                                )
+                            ]
+                        ),
+                        Row(
+                            expand = 1,
+                            alignment = 'end',
+                            controls=[
+                                Container(
+                                    alignment =alignment.center,
+                                    content = Row(
+                                        alignment = 'center',
+                                        spacing = 5,
+                                        controls=[
+                                            Container(
+                                                # we get the max temperature for that specific day
+                                                
+                                                width = 20,
+                                                content = Text(
+                                                    int(data[index]["max_temp"]) 
+                                                ),
+                                                text_align = 'start'
+                                            
+                                            )
+                                        ]
+                                    )
+                                    
+                                ),
+                                Container(
+                                    alignment =alignment.center,
+                                    content = Row(
+                                        alignment = 'center',
+                                        spacing = 5,
+                                        controls=[
+                                            Container(
+                                                # we get the min temperature for that specific day
+                                                width = 20,
+                                                content = Text(
+                                                    int(data[index]["min_temp"]) 
+                                                ),
+                                                text_align = 'end'
+                                            )
+                                        ]
+                                    )
+                                    
+                                ),
+                            ]
+                        )
+                    ]
+                )
+            )
+    return _bot_data  
     
+    # Bottom weather forecast
+    
+    def _bottom():
+        _bot_column = Column(
+            alignment="center",
+            horizontal_alignment="center",
+            spacing = 25,
+            
+        )
+        
+        for data in _bot_data():
+            _bot_column.controls.append(data)
+        
+        
+        bottom = Container(
+            padding = padding.only(top=280, left=20, right=20, bottom=20),
+            content = _bot_column
+        )
+        return bottom
     # This container is root container where all the different sub roots or functions will be stacked.
     # It could be regarded as the main app
+    
+    
     c = Container(
         width = 310,
         height= 660,
@@ -332,7 +492,7 @@ def main(page: Page):
         content= Stack(
             width= 300,
             height= 550,
-            controls= [_top(),]
+            controls= [_bottom,_top(),]
             
         )
     )
