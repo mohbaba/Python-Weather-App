@@ -58,7 +58,7 @@ def main(page: Page):
         current_description = str(data['weather']['description'])
         current_weather = data['weather']['code']
         current_wind = int(data['wind_spd'])
-        current_feels = int(data['app_temp'])
+        current_feels = int(data['app_max_temp'])
         current_humidity = int(data['rh'])
         
         return [current_temp,current_weather,current_description, current_wind,current_humidity,current_feels]
@@ -87,7 +87,7 @@ def main(page: Page):
             [ # The final two are the sunrise and sunset, they will be converted from unix time to readable time using datetime functions
             # The fromtimestamp and the strftime function does...
             datetime.datetime.fromtimestamp(
-                data["sunset"]
+                data["sunset_ts"]
             ).strftime("%I:%M %p"),
             "",
             "Sunset",
@@ -96,7 +96,7 @@ def main(page: Page):
             [ # The final two are the sunrise and sunset, they will be converted from unix time to readable time using datetime functions
             # The fromtimestamp and the strftime function does...
             datetime.datetime.fromtimestamp(
-                data["sunrise"]
+                data["sunrise_ts"]
             ).strftime("%I:%M %p"),
             "",
             "Sunrise",
@@ -106,7 +106,7 @@ def main(page: Page):
             ]
         # Time to create UI using the extra data above 
         
-        for data in extra:
+        for datas in extra:
             extra_info.append(
                 Container(
                     bgcolor="white10",
@@ -115,16 +115,16 @@ def main(page: Page):
                     content=Column(
                         alignment = "center",
                         horizontal_alignment="center",
-                        spacing = 25,
+                        spacing = 20,
                         controls= [
                             Container(
                                 alignment = alignment.center,
                                 content = Image(
-                                    src = data[3],
+                                    src = datas[3],
                                     color = 'white'
                                 ),
-                                width = 32,
-                                height = 32,
+                                width = 28,
+                                height = 30,
                             ),
                             Container(
                                 content=Column(
@@ -133,11 +133,11 @@ def main(page: Page):
                                     spacing = 0,
                                     controls = [
                                         Text(
-                                            str(data[0])+" " + data[1],
+                                            str(datas[0])+" " + datas[1],
                                             size = 14,
                                         ),
                                         Text(
-                                            data[2],
+                                            datas[2],
                                             color = "white54",
                                             size = 11,
                                         ),
@@ -149,16 +149,17 @@ def main(page: Page):
                     
                 )
             )
-        pass
+        return extra_info
+    
     
     # Animation
     def _expand(e):
         if e.data == "true":
-            c.content.controls[1].height = 560
-            c.content.controls[1].update()
+            c.content.controls[0].height = 560
+            c.content.controls[0].update()
         else:
-            c.content.controls[1].height = 660 * 0.40
-            c.content.controls[1].update()
+            c.content.controls[0].height = 660 * 0.40
+            c.content.controls[0].update()
     
     
     # Top container
@@ -222,7 +223,7 @@ def main(page: Page):
                                     Text(
                                         "Today",
                                         size = 12,
-                                        text_align = 'center',
+                                        text_align ='center',
                                         color= "white"
                                     ),
                                     Row(
@@ -356,9 +357,8 @@ def main(page: Page):
         )
         return top
         
-    
     # Bottom data
-    def _bot_data():
+    # def _bot_data():
         _bot_data = []
         for index in range(1,8):
             _bot_data.append(
@@ -458,11 +458,11 @@ def main(page: Page):
                     ]
                 )
             )
-    return _bot_data  
+    # return _bot_data  
     
     # Bottom weather forecast
     
-    def _bottom():
+    # def _bottom():
         _bot_column = Column(
             alignment="center",
             horizontal_alignment="center",
@@ -492,7 +492,7 @@ def main(page: Page):
         content= Stack(
             width= 300,
             height= 550,
-            controls= [_bottom,_top(),]
+            controls= [_top(),]
             
         )
     )
