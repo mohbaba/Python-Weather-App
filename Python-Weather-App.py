@@ -115,7 +115,7 @@ def main(page: Page):
                     content=Column(
                         alignment = "center",
                         horizontal_alignment="center",
-                        spacing = 20,
+                        spacing = 15,
                         controls= [
                             Container(
                                 alignment = alignment.center,
@@ -123,17 +123,18 @@ def main(page: Page):
                                     src = datas[3],
                                     color = 'white'
                                 ),
-                                width = 28,
+                                width = 30,
                                 height = 30,
                             ),
                             Container(
                                 content=Column(
                                     alignment = "center",
                                     horizontal_alignment="center",
-                                    spacing = 0,
+                                    spacing = 5,
                                     controls = [
                                         Text(
                                             str(datas[0])+" " + datas[1],
+                                            color = "white54",
                                             size = 14,
                                         ),
                                         Text(
@@ -155,11 +156,11 @@ def main(page: Page):
     # Animation
     def _expand(e):
         if e.data == "true":
-            c.content.controls[0].height = 560
-            c.content.controls[0].update()
+            c.content.controls[1].height = 560
+            c.content.controls[1].update()
         else:
-            c.content.controls[0].height = 660 * 0.40
-            c.content.controls[0].update()
+            c.content.controls[1].height = 660 * 0.40
+            c.content.controls[1].update()
     
     
     # Top container
@@ -358,7 +359,7 @@ def main(page: Page):
         return top
         
     # Bottom data
-    # def _bot_data():
+    def _bot_data():
         _bot_data = []
         for index in range(1,8):
             _bot_data.append(
@@ -458,11 +459,11 @@ def main(page: Page):
                     ]
                 )
             )
-    # return _bot_data  
+        return _bot_data  
     
     # Bottom weather forecast
     
-    # def _bottom():
+    def _bottom():
         _bot_column = Column(
             alignment="center",
             horizontal_alignment="center",
@@ -479,10 +480,11 @@ def main(page: Page):
             content = _bot_column
         )
         return bottom
+    
+    
     # This container is root container where all the different sub roots or functions will be stacked.
     # It could be regarded as the main app
-    
-    
+
     c = Container(
         width = 310,
         height= 660,
@@ -492,7 +494,7 @@ def main(page: Page):
         content= Stack(
             width= 300,
             height= 550,
-            controls= [_top(),]
+            controls= [_bottom(),_top(),]
             
         )
     )
