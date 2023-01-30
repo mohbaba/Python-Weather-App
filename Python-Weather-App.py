@@ -378,7 +378,7 @@ def main(page: Page):
                                         days[
                                             datetime.datetime.weekday(
                                                 datetime.datetime.fromtimestamp(
-                                                    data[index]['ts']
+                                                    response.json()['data'][index]['ts']
                                                 )
                                             )
                                         ]
@@ -398,11 +398,11 @@ def main(page: Page):
                                                 height = 20,
                                                 alignment = alignment.center_left,
                                                 content = Image(
-                                                    src = f'./assets/forecast/{data[index]["weather"]["description"].lower().png}'
+                                                    # src = f'./assets/forecast/{response.json()['data'][index]["weather"]["main"].lower()}.png'
                                                 )
                                             ),
                                             Text(
-                                                data[index]["weather"]["description"],
+                                                response.json()['data'][index]["weather"]["main"],
                                                 size=11,
                                                 color='white54',
                                                 text_align='center',
@@ -427,9 +427,10 @@ def main(page: Page):
                                                 
                                                 width = 20,
                                                 content = Text(
-                                                    int(data[index]["max_temp"]) 
+                                                    int(response.json()['data'][index]["max_temp"]),
+                                                    text_align = 'start'
                                                 ),
-                                                text_align = 'start'
+                                                
                                             
                                             )
                                         ]
@@ -446,9 +447,10 @@ def main(page: Page):
                                                 # we get the min temperature for that specific day
                                                 width = 20,
                                                 content = Text(
-                                                    int(data[index]["min_temp"]) 
+                                                    int(response.json()['data'][index]["min_temp"]),
+                                                    text_align = 'end' 
                                                 ),
-                                                text_align = 'end'
+                                                
                                             )
                                         ]
                                     )
