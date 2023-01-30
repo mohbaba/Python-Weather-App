@@ -400,6 +400,9 @@ def main(page: Page):
                                                 content = Image(
                                                     # src = f'./assets/forecast/{response.json()['data'][index]["weather"]["main"].lower()}.png'
                                                 )
+                                                
+                                                
+                                                
                                             ),
                                             Text(
                                                 response.json()['data'][index]["weather"]["main"],
